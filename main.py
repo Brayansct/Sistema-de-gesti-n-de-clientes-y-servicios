@@ -14,7 +14,6 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-
 # Excepciones
 
 class ClienteError(Exception):
@@ -25,7 +24,6 @@ class ServicioError(Exception):
 
 class ReservaError(Exception):
     pass
-
 
 # Clase Abtracta persona
 
@@ -39,9 +37,7 @@ class Persona(ABC):
     def mostrar_datos(self):
         pass
 
-
 # Cliente
-
 
 class Cliente(Persona):
 
@@ -66,9 +62,7 @@ class Cliente(Persona):
     def mostrar_datos(self):
         return f"{self.nombre} - {self.documento}"
 
-
 # Servicio Abstracto
-
 
 class Servicio(ABC):
 
@@ -84,9 +78,7 @@ class Servicio(ABC):
     def calcular_costo(self, cantidad):
         pass
 
-
 # Servicios
-
 
 class ReservaSala(Servicio):
 
@@ -103,9 +95,7 @@ class AsesoriaEspecializada(Servicio):
     def calcular_costo(self, horas):
         return self.tarifa * horas
 
-
 # Reserva
-
 
 class Reserva:
 
@@ -134,10 +124,8 @@ class Reserva:
 
         finally:
             logging.info("Proceso finalizado")
-
-
+            
 # Listas
-
 
 clientes = []
 servicios = []
@@ -261,7 +249,6 @@ def ver_reservas():
         logging.error(e)
 
 # Menu Principal
-
 
 while True:
 
