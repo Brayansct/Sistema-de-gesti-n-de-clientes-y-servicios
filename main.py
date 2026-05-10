@@ -259,3 +259,42 @@ def ver_reservas():
     except Exception as e:
         print("ERROR:", e)
         logging.error(e)
+
+# Menu Principal
+
+
+while True:
+
+    try:
+
+        print("\n===== SOFTWARE FJ =====")
+        print("1. Registrar cliente")
+        print("2. Registrar servicio")
+        print("3. Crear reserva")
+        print("4. Ver reservas")
+        print("5. Salir")
+
+        opcion = input("Seleccione una opcion: ")
+
+        if opcion == "1":
+            registrar_cliente()
+
+        elif opcion == "2":
+            registrar_servicio()
+
+        elif opcion == "3":
+            crear_reserva()
+
+        elif opcion == "4":
+            ver_reservas()
+
+        elif opcion == "5":
+            print("Saliendo del sistema...")
+            break
+
+        else:
+            print("Opcion invalida")
+
+    except Exception as e:
+        print("ERROR GENERAL:", e)
+        logging.error(e)
