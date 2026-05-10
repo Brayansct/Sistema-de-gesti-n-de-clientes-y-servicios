@@ -142,3 +142,120 @@ class Reserva:
 clientes = []
 servicios = []
 reservas = []
+
+#Funciones
+
+def registrar_cliente():
+
+    try:
+        nombre = input("Nombre: ")
+        documento = input("Documento: ")
+        correo = input("Correo: ")
+
+        cliente = Cliente(nombre, documento, correo)
+
+        clientes.append(cliente)
+
+        print("Cliente registrado correctamente")
+        logging.info("Cliente registrado")
+
+    except ClienteError as e:
+        print("ERROR:", e)
+        logging.error(e)
+        
+def registrar_servicio():
+
+    try:
+        print("\n1. Reserva Sala")
+        print("2. Alquiler Equipo")
+        print("3. Asesoría")
+
+        opcion = input("Seleccione: ")
+
+        nombre = input("Nombre servicio: ")
+        tarifa = float(input("Tarifa: "))
+
+        if opcion == "1":
+            servicio = ReservaSala(nombre, tarifa)
+
+        elif opcion == "2":
+            servicio = AlquilerEquipo(nombre, tarifa)
+
+        elif opcion == "3":
+            servicio = AsesoriaEspecializada(nombre, tarifa)
+
+        else:
+            raise ServicioError("Opcion invalida")
+
+        servicios.append(servicio)
+
+        print("Servicio registrado")
+        logging.info("Servicio registrado")
+
+    except Exception as e:
+        print("ERROR:", e)
+        logging.error(e)
+
+def crear_reserva():
+
+    try:
+
+        if not clientes:
+            raise ReservaError("No hay clientes")
+
+        if not servicios:
+            raise ReservaError("No hay servicios")
+
+        print("\nCLIENTES")
+
+        for i, c in enumerate(clientes):
+            print(i, c.mostrar_datos())
+
+        cliente_index = int(input("Seleccione cliente: "))
+
+        print("\nSERVICIOS")
+
+        for i, s in enumerate(servicios):
+            print(i, s.nombre)
+
+        servicio_index = int(input("Seleccione servicio: "))
+
+        cantidad = int(input("Cantidad/Horas/Días: "))
+
+        reserva = Reserva(
+            clientes[cliente_index],
+            servicios[servicio_index],
+            cantidad
+        )
+
+        costo = reserva.procesar()
+
+        reservas.append(reserva)
+
+        print("Reserva realizada")
+        print("Costo:", costo)
+
+    except Exception as e:
+        print("ERROR:", e)
+        logging.error(e)
+
+def ver_reservas():
+
+    try:
+
+        if not reservas:
+            print("No hay reservas")
+            return
+
+        for r in reservas:
+            print(
+                r.cliente.nombre,
+                "-",
+                r.servicio.nombre,
+                "-",
+                r.estado
+            )
+
+    except Exception as e:
+        print("ERROR:", e)
+        logging.error(e)
